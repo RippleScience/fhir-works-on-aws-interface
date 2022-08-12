@@ -11,6 +11,7 @@ import { History } from './history';
 import { Persistence } from './persistence';
 import { Search } from './search';
 import { Validator } from './validator';
+import { OperationBroker } from './operationHooks';
 
 /**
  * http://www.hl7.org/fhir/smart-app-launch/conformance/index.html#using-cs
@@ -185,4 +186,5 @@ export interface FhirConfig {
     profile: Profile;
     validators: Validator[];
     multiTenancyConfig?: MultiTenancyConfig;
+    operationBroker: OperationBroker;
 }
