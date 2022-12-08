@@ -10,9 +10,10 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}
           fetch-depth: 0
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 14
+          registry-url: https://npm.pkg.github.com/
       - name: Tag release
         run: |
           yarn --frozen-lockfile
@@ -21,6 +22,6 @@ jobs:
           git ls-remote --exit-code --tags origin $NEW_VERSION || git tag $NEW_VERSION
           git push origin --tags
       - name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{secrets.NPM_TOKEN}}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+        run: npm publish
